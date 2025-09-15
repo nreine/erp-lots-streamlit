@@ -1374,7 +1374,7 @@ elif menu == "📊 Graphiques et Analyses":
     
     controle_df["date_controle"] = pd.to_datetime(controle_df["date_controle"], errors="coerce")
     controle_df["Jour_Semaine"] = controle_df["date_controle"].dt.day_name()
-    df["Jour_Semaine"] = df["Jour_Semaine"].map({'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi', 'Thursday': 'Jeudi', 'Friday': 'Vendredi', 'Saturday': 'Samedi', 'Sunday': 'Dimanche'})
+    controle_df["Jour_Semaine"] = controle_df["Jour_Semaine"].map({'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi', 'Thursday': 'Jeudi', 'Friday': 'Vendredi', 'Saturday': 'Samedi', 'Sunday': 'Dimanche'})
     tests_par_jour = controle_df.groupby("Jour_Semaine")["quantite_a_tester"].sum().reset_index()
     
     import plotly.graph_objects as go
