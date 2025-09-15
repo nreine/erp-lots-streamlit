@@ -141,7 +141,7 @@ def login_form():
     st.markdown("<div style='text-align: center;'>Veuillez entrer vos identifiants pour accéder à l'application.</div>", unsafe_allow_html=True)
     st.divider()
     with st.form("login_form"):
-        st.image("imageExcelis.png", width=200)
+        st.image("C:/Users/USER/Desktop/Images/imageExcelis.png", width=200)
         st.markdown("<h6 style='text-align: center; color: grey;'><em>Département Cartes et Partenariat DCP</em></h6>", unsafe_allow_html=True)
     
         st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
@@ -587,7 +587,7 @@ st.divider()
 
 # Menu latéral avec icône burger
 with st.sidebar:
-    st.image("imageExcelis.png", width=200)
+    st.sidebar.image("C:/Users/USER/Desktop/Images/imageExcelis.png")
     st.markdown("<h6 style='text-align: center; color: grey;'><em>Département Cartes et Partenariat DCP</em></h6>", unsafe_allow_html=True)
     
     menu = st.selectbox("Naviguer vers :", [
@@ -753,10 +753,12 @@ elif menu == "🗂 Inventaire des tests":
     df["date_controle"] = pd.to_datetime(df["date_controle"])
     df["Année"] = df["date_controle"].dt.year
     df["Mois"] = df["date_controle"].dt.month_name()
+df["Mois"] = df["Mois"].map({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'})
     df["Trimestre"] = df["date_controle"].dt.quarter
     df["Semaine"] = df["date_controle"].dt.isocalendar().week
     df["Jour"] = df["date_controle"].dt.day
-    df["Jour_Semaine"] = df["date_controle"].dt.day_name(locale='fr_FR')
+    df["Jour_Semaine"] = df["date_controle"].dt.day_name()
+df["Jour_Semaine"] = df["Jour_Semaine"].map({'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi', 'Thursday': 'Jeudi', 'Friday': 'Vendredi', 'Saturday': 'Samedi', 'Sunday': 'Dimanche'})
 
     if df.empty:
         st.warning("Aucun test de contrôle qualité enregistré.")
@@ -940,7 +942,8 @@ elif menu == "📊 Graphiques et Analyses":
 
 # Conversion des dates et extraction du mois
     lots_df["date_enregistrement"] = pd.to_datetime(lots_df["date_enregistrement"], errors="coerce")
-    lots_df["Mois"] = lots_df["date_enregistrement"].dt.month_name()
+    lots_df["Mois"] = lots_df["date_enregistrement"].dt.month_name(locale="fr_FR")
+df["Mois"] = df["Mois"].map({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'})
 
 # Agrégation mensuelle
     production_mensuelle = lots_df.groupby("Mois")["quantite"].sum().reset_index()
@@ -1370,7 +1373,8 @@ elif menu == "📊 Graphiques et Analyses":
     
     
     controle_df["date_controle"] = pd.to_datetime(controle_df["date_controle"], errors="coerce")
-    controle_df["Jour_Semaine"] = controle_df["date_controle"].dt.day_name()
+    controle_df["Jour_Semaine"] = controle_df["date_controle"].dt.day_name(locale="fr_FR")
+df["Jour_Semaine"] = df["Jour_Semaine"].map({'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi', 'Thursday': 'Jeudi', 'Friday': 'Vendredi', 'Saturday': 'Samedi', 'Sunday': 'Dimanche'})
     tests_par_jour = controle_df.groupby("Jour_Semaine")["quantite_a_tester"].sum().reset_index()
     
     import plotly.graph_objects as go
