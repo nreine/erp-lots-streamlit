@@ -942,7 +942,7 @@ elif menu == "📊 Graphiques et Analyses":
 
 # Conversion des dates et extraction du mois
     lots_df["date_enregistrement"] = pd.to_datetime(lots_df["date_enregistrement"], errors="coerce")
-    lots_df["Mois"] = lots_df["date_enregistrement"].dt.month_name(locale="fr_FR")
+    lots_df["Mois"] = lots_df["date_enregistrement"].dt.month_name()
     df["Mois"] = df["Mois"].map({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'})
 
 # Agrégation mensuelle
@@ -1373,7 +1373,7 @@ elif menu == "📊 Graphiques et Analyses":
     
     
     controle_df["date_controle"] = pd.to_datetime(controle_df["date_controle"], errors="coerce")
-    controle_df["Jour_Semaine"] = controle_df["date_controle"].dt.day_name(locale="fr_FR")
+    controle_df["Jour_Semaine"] = controle_df["date_controle"].dt.day_name()
     df["Jour_Semaine"] = df["Jour_Semaine"].map({'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi', 'Thursday': 'Jeudi', 'Friday': 'Vendredi', 'Saturday': 'Samedi', 'Sunday': 'Dimanche'})
     tests_par_jour = controle_df.groupby("Jour_Semaine")["quantite_a_tester"].sum().reset_index()
     
