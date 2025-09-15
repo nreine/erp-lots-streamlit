@@ -943,7 +943,7 @@ elif menu == "📊 Graphiques et Analyses":
 # Conversion des dates et extraction du mois
     lots_df["date_enregistrement"] = pd.to_datetime(lots_df["date_enregistrement"], errors="coerce")
     lots_df["Mois"] = lots_df["date_enregistrement"].dt.month_name()
-    df["Mois"] = df["Mois"].map({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'})
+    lots_df["Mois"] = lots_df["Mois"].map({'January': 'Janvier', 'February': 'Février', 'March': 'Mars', 'April': 'Avril', 'May': 'Mai', 'June': 'Juin', 'July': 'Juillet', 'August': 'Août', 'September': 'Septembre', 'October': 'Octobre', 'November': 'Novembre', 'December': 'Décembre'})
 
 # Agrégation mensuelle
     production_mensuelle = lots_df.groupby("Mois")["quantite"].sum().reset_index()
