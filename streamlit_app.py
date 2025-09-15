@@ -752,7 +752,7 @@ elif menu == "🗂 Inventaire des tests":
 # Conversion de la date et ajout des colonnes temporelles
     df["date_controle"] = pd.to_datetime(df["date_controle"])
     df["Année"] = df["date_controle"].dt.year
-    df["Mois"] = df["date_controle"].dt.month_name(locale='fr_FR')
+    df["Mois"] = df["date_controle"].dt.month_name()
     df["Trimestre"] = df["date_controle"].dt.quarter
     df["Semaine"] = df["date_controle"].dt.isocalendar().week
     df["Jour"] = df["date_controle"].dt.day
@@ -940,7 +940,7 @@ elif menu == "📊 Graphiques et Analyses":
 
 # Conversion des dates et extraction du mois
     lots_df["date_enregistrement"] = pd.to_datetime(lots_df["date_enregistrement"], errors="coerce")
-    lots_df["Mois"] = lots_df["date_enregistrement"].dt.month_name(locale="fr_FR")
+    lots_df["Mois"] = lots_df["date_enregistrement"].dt.month_name()
 
 # Agrégation mensuelle
     production_mensuelle = lots_df.groupby("Mois")["quantite"].sum().reset_index()
@@ -1370,7 +1370,7 @@ elif menu == "📊 Graphiques et Analyses":
     
     
     controle_df["date_controle"] = pd.to_datetime(controle_df["date_controle"], errors="coerce")
-    controle_df["Jour_Semaine"] = controle_df["date_controle"].dt.day_name(locale="fr_FR")
+    controle_df["Jour_Semaine"] = controle_df["date_controle"].dt.day_name()
     tests_par_jour = controle_df.groupby("Jour_Semaine")["quantite_a_tester"].sum().reset_index()
     
     import plotly.graph_objects as go
