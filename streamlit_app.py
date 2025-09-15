@@ -939,7 +939,7 @@ elif menu == "📊 Graphiques et Analyses":
     
     import plotly.graph_objects as go
     import numpy as np
-
+    df = pd.read_sql_query(query, conn)
 # Conversion des dates et extraction du mois
     lots_df["date_enregistrement"] = pd.to_datetime(lots_df["date_enregistrement"], errors="coerce")
     lots_df["Mois"] = lots_df["date_enregistrement"].dt.month_name()
