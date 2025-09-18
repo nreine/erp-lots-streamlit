@@ -1131,9 +1131,19 @@ elif menu == "📊 Graphiques et Analyses":
     import plotly.graph_objects as go
     import numpy as np
 
-# Données simulées
-    filiales = ["Benin", "Burkina Faso", "Côte d'Ivoire", "Guinée Bissau", "Guinée Conakry", "Mali", "Niger", "Sénégal", "Togo"]
-    quantites = [3644, 31256, 10226, 401, 1402, 1770, 323, 7957, 3191]
+
+# Connexion à la base de données
+      conn = sqlite3.connect("erp_lots", check_same_thread=False)
+
+# Extraction des données réelles depuis la table 'lots'
+     query = "SELECT filiale, SUM(quantite) as total_quantite FROM lots GROUP BY filiale"
+     df = pd.read_sql_query(query, conn)
+
+# Préparation des coordonnées pour le Mesh3D
+     filiales = df["filiale"].tolist()
+     quantites = df["total_quantite"].tolist()
+     n = len(filiales)
+
 
 # Coordonnées X (position des filiales)
     x = np.arange(len(filiales))
