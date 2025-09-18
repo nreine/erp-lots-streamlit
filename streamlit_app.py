@@ -1445,7 +1445,7 @@ elif menu == "📊 Graphiques et Analyses":
 
     
 # Connexion à la base de données
-   conn = sqlite3.connect("erp_lots", check_same_thread=False)
+     conn = sqlite3.connect("erp_lots", check_same_thread=False)
 
 # Requête SQL pour agréger les quantités par mois
    query = """
