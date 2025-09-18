@@ -1133,16 +1133,16 @@ elif menu == "📊 Graphiques et Analyses":
 
 
 # Connexion à la base de données
-     conn = sqlite3.connect("erp_lots", check_same_thread=False)
+    conn = sqlite3.connect("erp_lots", check_same_thread=False)
 
 # Extraction des données réelles depuis la table 'lots'
-     query = "SELECT filiale, SUM(quantite) as total_quantite FROM lots GROUP BY filiale"
-     df = pd.read_sql_query(query, conn)
+    query = "SELECT filiale, SUM(quantite) as total_quantite FROM lots GROUP BY filiale"
+    df = pd.read_sql_query(query, conn)
 
 # Préparation des coordonnées pour le Mesh3D
-     filiales = df["filiale"].tolist()
-     quantites = df["total_quantite"].tolist()
-     n = len(filiales)
+    filiales = df["filiale"].tolist()
+    quantites = df["total_quantite"].tolist()
+    n = len(filiales)
 
 
 # Coordonnées X (position des filiales)
