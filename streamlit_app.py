@@ -1133,7 +1133,7 @@ elif menu == "📊 Graphiques et Analyses":
 
 
 # Connexion à la base de données
-      conn = sqlite3.connect("erp_lots", check_same_thread=False)
+     conn = sqlite3.connect("erp_lots", check_same_thread=False)
 
 # Extraction des données réelles depuis la table 'lots'
      query = "SELECT filiale, SUM(quantite) as total_quantite FROM lots GROUP BY filiale"
