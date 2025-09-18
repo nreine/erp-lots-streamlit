@@ -1443,6 +1443,38 @@ elif menu == "📊 Graphiques et Analyses":
     st.subheader("Évolution mensuelle des lots enregistrés")
     st.line_chart(evolution_lots)
 
+    
+# Connexion à la base de données
+   conn = sqlite3.connect("erp_lots", check_same_thread=False)
+
+# Requête SQL pour agréger les quantités par mois
+   query = """
+        SELECT 
+         strftime('%Y-%m', date_enregistrement) AS mois,
+         SUM(quantite) AS total_quantite
+         FROM lots
+         GROUP BY mois
+         ORDER BY mois
+         """
+    df = pd.read_sql_query(query, conn)
+
+# Création du graphique avec Plotly
+    fig = px.line(
+        df,
+        x="mois",
+        y="total_quantite",
+        markers=True,
+        title="📈 Évolution mensuelle des lots enregistrés",
+        labels={"mois": "Mois", "total_quantite": "Quantité totale"}
+    )
+
+    fig.update_traces(line=dict(color="royalblue", width=3), marker=dict(size=8))
+    fig.update_layout(xaxis_tickangle=-45)
+
+# Affichage dans Streamlit
+    st.plotly_chart(fig, use_container_width=True)
+
+
     st.subheader("Évolution hebdomadaire des tests qualité")
     st.line_chart(evolution_tests)
     # pour afficher les graphiques 3D et les KPIs
