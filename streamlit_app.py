@@ -1437,11 +1437,8 @@ elif menu == "📊 Graphiques et Analyses":
     lots_df["date_enregistrement"] = pd.to_datetime(lots_df["date_enregistrement"])
     controle_df["date_controle"] = pd.to_datetime(controle_df["date_controle"])
 
-    evolution_lots = lots_df.groupby(lots_df["date_enregistrement"].dt.to_period("M")).size()
     evolution_tests = controle_df.groupby(controle_df["date_controle"].dt.to_period("W")).size()
 
-    st.subheader("Évolution mensuelle des lots enregistrés")
-    st.line_chart(evolution_lots)
 
     
 # Connexion à la base de données
