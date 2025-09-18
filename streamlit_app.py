@@ -1448,7 +1448,7 @@ elif menu == "📊 Graphiques et Analyses":
     conn = sqlite3.connect("erp_lots", check_same_thread=False)
 
 # Requête SQL pour agréger les quantités par mois
-   query = """
+    query = """
         SELECT 
          strftime('%Y-%m', date_enregistrement) AS mois,
          SUM(quantite) AS total_quantite
@@ -1456,7 +1456,7 @@ elif menu == "📊 Graphiques et Analyses":
          GROUP BY mois
          ORDER BY mois
          """
-    df = pd.read_sql_query(query, conn)
+     df = pd.read_sql_query(query, conn)
 
 # Création du graphique avec Plotly
     fig = px.line(
