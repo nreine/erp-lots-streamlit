@@ -1456,7 +1456,7 @@ elif menu == "📊 Graphiques et Analyses":
          GROUP BY mois
          ORDER BY mois
          """
-     df = pd.read_sql_query(query, conn)
+    df = pd.read_sql_query(query, conn)
 
 # Création du graphique avec Plotly
     fig = px.line(
