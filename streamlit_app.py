@@ -875,9 +875,16 @@ elif menu == "📊 Graphiques et Analyses":
     import plotly.graph_objects as go
     import numpy as np
 
-# Données simulées
-    types_lot = ["Ordinaire", "Émission instantanée", "Renouvellement"]
-    quantites = [15200, 8700, 4300]
+# Connexion à la base de données
+    conn = sqlite3.connect("erp_lots", check_same_thread=False)
+
+# Extraction des données réelles depuis la table 'lots'
+    query = "SELECT type_lot, SUM(quantite) as total_quantite FROM lots GROUP BY type_lot"
+    df = pd.read_sql_query(query, conn)
+
+# Préparation des données pour le graphique
+    types_lot = df["type_lot"].tolist()
+    quantites = df["total_quantite"].tolist()
 
 # Couleurs pastel
     colors = ['lightblue', 'lightgreen', 'lightpink']
