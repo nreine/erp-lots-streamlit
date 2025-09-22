@@ -1471,9 +1471,33 @@ elif menu == "📊 Graphiques et Analyses":
 # Affichage dans Streamlit
     st.plotly_chart(fig, use_container_width=True)
 
+# Extraction des données hebdomadaires réelles
+    query = """
+    SELECT 
+        strftime('%Y-%W', date_controle) AS semaine,
+        SUM(quantite_a_tester) AS total_tests
+        FROM controle_qualite
+        GROUP BY semaine
+        ORDER BY semaine
+        """
+    df = pd.read_sql_query(query, conn)
 
-    st.subheader("Évolution hebdomadaire des tests qualité")
-    st.line_chart(evolution_tests)
+    import plotly.express as px
+
+# Graphique à barres
+    fig = px.bar(
+        df,
+        x="semaine",
+        y="total_tests",
+        title="📊 Évolution hebdomadaire des tests qualité",
+        labels={"semaine": "Semaine", "total_tests": "Nombre total de tests"},
+        text="total_tests",
+        height=500
+    )
+    fig.update_traces(marker_color="mediumseagreen", textposition="outside")
+    fig.update_layout(xaxis_tickangle=-45)
+
+    st.plotly_chart(fig, use_container_width=True)
     # pour afficher les graphiques 3D et les KPIs
 
 
